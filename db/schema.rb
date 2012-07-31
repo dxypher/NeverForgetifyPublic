@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730211442) do
+ActiveRecord::Schema.define(:version => 20120730224643) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -28,9 +28,11 @@ ActiveRecord::Schema.define(:version => 20120730211442) do
     t.text     "body"
     t.datetime "time"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.datetime "sent_time"
+    t.string   "natural_time"
+    t.string   "recurring"
   end
 
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"

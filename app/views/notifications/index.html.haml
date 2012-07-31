@@ -4,8 +4,9 @@
       %td
         = notification.body
       %td
-        = notification.time
+        = notification.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
       %td
+        = link_to "Edit", edit_notification_path(notification)
         = link_to "Delete", notification_path(notification), confirm: "Are you sure", method: :delete
 = link_to "Add New Notification", new_notification_path
 

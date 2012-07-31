@@ -130,6 +130,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  chronic
   coffee-rails (~> 3.2.1)
   devise
   formtastic
