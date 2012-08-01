@@ -24,9 +24,18 @@ class TwilioController < ActionController::Base
             r.Sms "Your notification has been set."
           end
           render :xml => response.text
+        else
+          response = Twilio::TwiML::Response.new do |r|
+            x = @notification.errors.messages
+            r.Sms "#{ x }"
+          end
+          render :xml => response.text
         end
       else
-        render :inline => "Epic fail"
+        response = Twilio::TwiML::Response.new do |r|
+          r.Sms "You must register"
+        end
+        render :xml => response.text
       end
       } 
     end
