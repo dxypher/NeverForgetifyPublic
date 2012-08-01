@@ -12,7 +12,7 @@ class TwilioController < ActionController::Base
     sender = User.find_by_phone_number(from) rescue nil
     
     
-    responds_to do |format|
+    respond_to do |format|
       format.xml {
       if sender.present?
         @notification = Notification.new
