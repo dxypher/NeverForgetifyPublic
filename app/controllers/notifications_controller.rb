@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications = Notification.all
+    @notifications = current_user.notifications
   end
 
   def new
