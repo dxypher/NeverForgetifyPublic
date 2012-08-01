@@ -11,15 +11,23 @@ class TwilioController < ActionController::Base
     message = message_parts.length > 1 ? message_parts[1] : "You set a reminder."
     sender = User.find_by_phone_number(from) rescue nil
     
-    if sender.present?
-      @notification = Notification.new
-      @notification.user = sender
-      @notification.natural_time = time
-      @notification.body = message
-      @notification.save
-    else
-      
-    end
     
+    responds_to do |format|
+      format.xml {
+      if sender.present?
+        @notification = Notification.new
+        @notification.user = sender
+        @notification.natural_time = time
+        @notification.body = message
+      if @notification.save
+        response = Twilio::TwiML::Response.new do |r|
+          r.Sms "Your notification has been set."
+        end
+        render :xml => response
+      else
+      
+      end
+      } 
+    end
   end
 end
