@@ -8,7 +8,7 @@ set :repository,  "git@github.com:kohactive/Neverforgetify.git"
 set :user, "deployment"
 set :scm_verbose, true
 set :scm, :git
-set :use_sudo, true
+set :use_sudo, false
 
 #deployment settings
 set :current_dir, "current"
@@ -43,7 +43,7 @@ namespace :deploy do
   task :restart, :roles => :app do
     run "mkdir -p /usr/share/nginx/ruby/apps/#{application}/#{current_dir}/tmp"
     run "sudo chmod 775 -R /usr/share/nginx/ruby/apps/#{application}/#{current_dir}/tmp"
-    run "sudo chmod 775 -R /usr/share/nginx/ruby/apps/#{application}/#{current_dir}/public/assets"
+    #run "sudo chmod 775 -R /usr/share/nginx/ruby/apps/#{application}/#{current_dir}/public/assets"
     run "touch #{File.join("/usr/share/nginx/ruby/apps/#{application}/#{current_dir}/tmp",'restart.txt')}"
   end
 end
