@@ -6,4 +6,6 @@ class Notification < ActiveRecord::Base
     self.time = Chronic.parse(self.natural_time, :context => :future)
   end
   
+  validates :time, :presence => true
+  
 end

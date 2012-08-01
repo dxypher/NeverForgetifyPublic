@@ -6,6 +6,8 @@ NeverForgetify::Application.routes.draw do
   root to: "notifications#index"
 
   resources :notifications
+  
+  match "/twilio" => 'twilio#create'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
