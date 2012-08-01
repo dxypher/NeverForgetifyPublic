@@ -9,7 +9,7 @@ class TwilioController < ApplicationController
     puts time.inspect
     
     message = message_parts.length > 1 ? message_parts[1] : "You set a reminder."
-    sender = User.find_by_phone_number("") rescue nil
+    sender = User.find_by_phone_number(from) rescue nil
     
     if sender.present?
       @notification = Notification.new
