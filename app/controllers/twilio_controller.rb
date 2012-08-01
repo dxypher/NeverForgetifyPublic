@@ -1,4 +1,4 @@
-class TwilioController < ApplicationController
+class TwilioController < ActionController::Base
   def create
     from = params[:From]
     from.gsub!("+1", "");
