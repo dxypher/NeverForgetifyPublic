@@ -26,6 +26,8 @@ gem 'haml-rails'
 gem 'formtastic'
 gem 'twilio-ruby'
 gem 'whenever'
+gem 'chronic'
+gem 'capistrano'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

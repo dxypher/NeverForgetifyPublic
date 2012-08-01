@@ -8,7 +8,8 @@ class NotificationsController < ApplicationController
   end
 
   def create
-    notification = Notification.create(params[:notification])
+    notification = Notification.new(params[:notification])
+    
     notification.user = current_user
     notification.save
     redirect_to notifications_path
@@ -20,8 +21,12 @@ class NotificationsController < ApplicationController
   end
 
   def edit
+    @notification = Notification.find(params[:id])
   end
 
   def update
+    @notification = Notification.find(params[:id])
+    @notification.update_attributes(params[:notification])
+    redirect_to root_path
   end
 end

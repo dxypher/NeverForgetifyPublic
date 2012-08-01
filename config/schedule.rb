@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 5.minutes do
+every 1.minutes do
   rake "never_forgetify:send_notifications"
 end
