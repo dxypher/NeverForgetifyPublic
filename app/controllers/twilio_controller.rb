@@ -19,11 +19,12 @@ class TwilioController < ActionController::Base
         @notification.user = sender
         @notification.natural_time = time
         @notification.body = message
-      if @notification.save
-        response = Twilio::TwiML::Response.new do |r|
-          r.Sms "Your notification has been set."
+        if @notification.save
+          response = Twilio::TwiML::Response.new do |r|
+            r.Sms "Your notification has been set."
+          end
+          render :xml => response
         end
-        render :xml => response
       else
       
       end
