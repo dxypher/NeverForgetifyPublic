@@ -1,4 +1,6 @@
 NeverForgetify::Application.routes.draw do
+  get "twilio/create"
+
   devise_for :users
 
   root to: "notifications#index"

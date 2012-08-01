@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :email, :password, :phone_number, :profile_pic, :username
   
+  before_validation do
+    self.phone_number = self.phone_number.gsub(/(^1)*\D/, "");
+  end
   
   has_many :notifications
 end
