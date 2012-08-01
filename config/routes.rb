@@ -1,7 +1,7 @@
 NeverForgetify::Application.routes.draw do
   get "twilio/create"
 
-  devise_for :users
+  devise_for :users, :path_names => { :sign_in => 'login', :sign_out => 'logout'}
 
   root to: "notifications#index"
 
