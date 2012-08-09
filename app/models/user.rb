@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :email, :password, :phone_number, :profile_pic, :username
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :phone_number, :profile_pic, :username
   
   before_validation do
     self.phone_number = self.phone_number.gsub(/(^1)*\D/, "");

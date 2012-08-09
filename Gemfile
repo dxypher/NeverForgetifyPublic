@@ -1,12 +1,17 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.7'
+gem 'bootstrap-sass'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql'
 
+group :test do
+  gem 'rspec-rails'
+  gem 'shoulda'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
