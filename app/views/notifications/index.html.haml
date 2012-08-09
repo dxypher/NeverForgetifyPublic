@@ -1,5 +1,13 @@
+%br
 %table
   - @notifications.each do |notification|
+    %tr
+      %th
+        = Notification
+      %th
+        = 'Date / Time'
+      %th
+      %th
     %tr
       %td
         = notification.body
@@ -8,6 +16,7 @@
       %td
         = link_to "Edit", edit_notification_path(notification)
         = link_to "Delete", notification_path(notification), confirm: "Are you sure", method: :delete
+%br
 = link_to "Add New Notification", new_notification_path
 
   

@@ -1,6 +1,16 @@
-= semantic_form_for @notification do |f|
-  = f.inputs do
-    = f.input :body
-    = f.input :natural_time, :as => :string
-    = f.input :recurring, :as => :select, :collection => ["Every Day", "Every Week", "Every Month"]
-  = f.actions
+/ = semantic_form_for @notification do |f|
+/   = f.inputs do
+/     = f.input :body
+/     = f.input :natural_time, :as => :string
+/     = f.input :recurring, :as => :select, :collection => ["Every Day", "Every Week", "Every Month"]
+/   = f.actions  
+= form_for @notification do |f|
+  = f.label :body
+  = f.text_area :body
+  = f.label :natural_time, :as => :string
+  = f.text_field :natural_time, :as => :string
+  = f.label :recurring, :collection => ["Every Day", "Every Week", "Every Month"]
+  = f.select :recurring, :collection => ["Not Recurring","Every Day", "Every Week", "Every Month"]
+  %br
+  %br
+  = f.submit
