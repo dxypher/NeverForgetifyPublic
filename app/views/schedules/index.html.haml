@@ -1,0 +1,17 @@
+%br
+%table
+  %tr
+    %th
+      = Notification
+    %th
+      = 'Dates / Times'
+    %th
+    %th
+  - @notification.schedules.each do |schedule|
+    %tr
+      %td
+        = @notification.body
+      %td
+        = schedule.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
+      %td
+        = link_to "Delete", notification_schedule_path(@notification, schedule), confirm: "Are you sure", method: :delete

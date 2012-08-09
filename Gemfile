@@ -33,6 +33,7 @@ gem 'twilio-ruby'
 gem 'whenever'
 gem 'chronic'
 gem 'capistrano'
+gem 'recurrence'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

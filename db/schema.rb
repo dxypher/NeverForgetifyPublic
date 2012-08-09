@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730224643) do
+ActiveRecord::Schema.define(:version => 20120809191709) do
 
   create_table "authentications", :force => true do |t|
     t.string   "provider"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20120730224643) do
   end
 
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
+
+  create_table "schedules", :force => true do |t|
+    t.datetime "time"
+    t.boolean  "sent"
+    t.integer  "notification_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "schedules", ["notification_id"], :name => "index_schedules_on_notificaton_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"

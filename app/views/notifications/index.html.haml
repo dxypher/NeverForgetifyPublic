@@ -1,16 +1,17 @@
 %br
 %table
+  %tr
+    %th
+      = Notification
+    %th
+      = 'Date / Time'
+    %th
+    %th
   - @notifications.each do |notification|
-    %tr
-      %th
-        = Notification
-      %th
-        = 'Date / Time'
-      %th
-      %th
+    
     %tr
       %td
-        = notification.body
+        = link_to notification.body, notification_schedules_path(notification)
       %td
         = notification.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
       %td

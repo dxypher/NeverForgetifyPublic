@@ -28,5 +28,13 @@ namespace :never_forgetify do
     # mark that notification as sent at the current time
     
     # save notification
+    
+    desc "Schedule weekly recurring notifications for each user"
+    task :schedule_recurring_notifications => :environment do
+       #Schedule table includes all notifications that are recurring
+       #find all schedule items that have recurring times within 1 week from DateTime.now
+       #append these to notifications table
+        #recurring_time += user.notifiction.time + day || week || month
+    end
   end
 end
