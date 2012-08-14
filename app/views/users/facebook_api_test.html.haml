@@ -1,0 +1,30 @@
+
+%br
+%div#likes
+
+
+
+
+
+
+%script#like{:type => "text/html"}
+
+  %ul
+    {{#data}}
+    %li
+      {{name}}:
+      
+      {{category}}
+    {{/data}}
+    =@api_info
+
+
+
+
+:javascript
+  var graph_data = #{@api_info};
+  
+   $(document).ready(function () {
+    jQuery("#likes").html(ich.like(graph_data));
+   });
+  

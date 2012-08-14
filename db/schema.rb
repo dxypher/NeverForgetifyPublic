@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730224643) do
+ActiveRecord::Schema.define(:version => 20120813155735) do
 
   create_table "authentications", :force => true do |t|
-    t.string   "provider"
-    t.string   "token"
     t.integer  "user_id"
     t.string   "uid"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "token"
+    t.string   "token_secret"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "provider"
   end
 
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
@@ -36,6 +37,16 @@ ActiveRecord::Schema.define(:version => 20120730224643) do
   end
 
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
+
+  create_table "schedules", :force => true do |t|
+    t.datetime "time"
+    t.boolean  "sent"
+    t.integer  "notification_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "schedules", ["notification_id"], :name => "index_schedules_on_notificaton_id"
 
   create_table "users", :force => true do |t|
     t.string   "username"
@@ -54,6 +65,10 @@ ActiveRecord::Schema.define(:version => 20120730224643) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "facebook"
+    t.integer  "time_zone"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
