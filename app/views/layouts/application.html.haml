@@ -30,6 +30,8 @@
               - if current_user
                 %li
                   = link_to "Log out", logout_path
+                %li
+                  = link_to "Profile", user_path(current_user)
               - else
                 %li
                   = link_to "Sign up", new_user_registration_path

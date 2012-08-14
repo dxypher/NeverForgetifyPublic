@@ -21,6 +21,6 @@ NeverForgetify::Application.routes.draw do
   
   match "/twilio" => 'twilio#create'
   
-  
+  resources :users
 
 end
