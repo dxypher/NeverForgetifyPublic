@@ -29,12 +29,17 @@ namespace :never_forgetify do
     
     # save notification
     
-    desc "Schedule weekly recurring notifications for each user"
-    task :schedule_recurring_notifications => :environment do
+    desc "Schedule weekly and daily recurring notifications for each user"
+    task :schedule_weekly_daily_notifications => :environment do
        #Schedule table includes all notifications that are recurring
        #find all schedule items that have recurring times within 1 week from DateTime.now
        #append these to notifications table
         #recurring_time += user.notifiction.time + day || week || month
+    end
+    
+    desc "Schedule monthly recurring notifications"
+    task do
+      
     end
   end
 end

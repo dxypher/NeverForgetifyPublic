@@ -34,6 +34,9 @@ gem 'whenever'
 gem 'chronic'
 gem 'capistrano'
 gem 'recurrence'
+gem 'oauth2'
+gem "omniauth-facebook", "1.3.0"
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
