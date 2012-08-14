@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
    def create_temp_login from
      email = "#{from}@neverforgetify.com"
      upassword = Devise.friendly_token[0,20]
-     user = User.create(email: email, phone_number: from, password: upassword])
+     user = User.create(email: email, phone_number: from, password: upassword)
    end
    
 end
