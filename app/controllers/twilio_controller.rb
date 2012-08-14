@@ -32,8 +32,9 @@ class TwilioController < ActionController::Base
           render :xml => response.text
         end
       else
+        new_user = create_temp_login from
         response = Twilio::TwiML::Response.new do |r|
-          r.Sms "You must register"
+          r.Sms "You're notification has been set, login with your phone number and use #{new_user.upassword} as your password."
         end
         render :xml => response.text
       end

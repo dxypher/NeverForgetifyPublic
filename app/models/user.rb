@@ -6,13 +6,23 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :phone_number, :profile_pic, :username, :facebook, :time_zone, :first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :phone_number, :profile_pic, :username, :facebook, :time_zone, :first_name, :last_name, :login
+  attr_accessor :login
   has_many :authentications
   before_validation do
     self.phone_number = self.phone_number.gsub(/(^1)*\D/, "") if self.phone_number.present?
   end
   
   has_many :notifications
+  
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["phone_number = :pvalue OR lower(email) = :evalue", { :pvalue => login.gsub("+1", "").gsub(/(^1)*\D/, ""), :evalue => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
   
   def self.find_or_create_for_oauth(access_token, signed_in_resource=nil)
        
@@ -37,4 +47,11 @@ class User < ActiveRecord::Base
        return user
      end
    end
+   
+   def create_temp_login from
+     email = "#{from}@neverforgetify.com"
+     upassword = Devise.friendly_token[0,20]
+     user = User.create(email: email, phone_number: from, password: upassword])
+   end
+   
 end
