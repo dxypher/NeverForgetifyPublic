@@ -15,4 +15,14 @@ class UsersController < ApplicationController
     @user = User.find(current_user)
   end
   
+  def reset_password_form
+    @user = User.find(params[:id])
+  end
+  
+  def reset_password
+    puts params[:user][:password]
+    user = User.find(params[:id]).reset_password!(params[:user][:password], params[:user][:password_confirmation])
+    redirect_to root_path
+  end
+  
 end

@@ -16,11 +16,24 @@ NeverForgetify::Application.routes.draw do
   
   resources :notifications do
     resources :schedules
+    collection do 
+      get :ajax_test
+    end
   end
   
   
   match "/twilio" => 'twilio#create'
+  match "/users/:id/reset_form" => 'users#reset_password_form', as: 'reset_password_form'
+  match "/users/:id/reset" => 'users#reset_password', as: 'reset_password'
+  
   
   resources :users
+  
+  namespace :api do
+    resources :notifications
+  end
 
+  namespace :v2 do
+    resources :notifications
+  end
 end

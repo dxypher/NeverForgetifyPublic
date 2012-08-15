@@ -1,0 +1,25 @@
+
+%br
+%div#notification
+
+
+
+
+
+
+%script#ntemplate{:type => "text/html"}
+
+  = render :partial => 'notification'
+  = render :partial => 'schedules'
+
+
+
+
+:javascript
+
+   $(document).ready(function () {
+     $.get("/api/notifications/#{@notification_id}.json", function(data){
+      console.log(data);
+      jQuery("#notification").html(ich.ntemplate(data));
+     });
+   });

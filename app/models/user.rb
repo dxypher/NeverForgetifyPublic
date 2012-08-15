@@ -6,11 +6,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :phone_number, :profile_pic, :username, :facebook, :time_zone, :first_name, :last_name, :login
+  attr_accessible :email, :password, :password_confirmation, :upassword, :remember_me, :phone_number, :profile_pic, :username, :facebook, :time_zone, :first_name, :last_name, :login
   attr_accessor :login
   has_many :authentications
   before_validation do
-    self.phone_number = self.phone_number.gsub(/(^1)*\D/, "") if self.phone_number.present?
+    self.phone_number = self.phone_number.to_s.gsub(/(^1)*\D/, "") if self.phone_number.present?
+    # self.phone_number = self.phone_number if self.phone_number.present?
   end
   
   has_many :notifications
@@ -22,6 +23,32 @@ class User < ActiveRecord::Base
     else
       where(conditions).first
     end
+  end
+  
+  alias :old_send_reset_password_instructions :send_reset_password_instructions 
+  
+  def send_reset_password_instructions
+    
+    if self.email.include?("@neverforgetify.com")
+      new_password = Devise.friendly_token[0,6];
+      self.reset_password!(new_password,new_password);
+      client = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
+      phone_number = self.phone_number.gsub(/(^1)*\D/, "");
+      
+      msg_hash = {:from => TWILIO_NUMBER,
+      :to => "+1#{phone_number}",
+      :body => "Your new temporary password is: #{new_password}"}
+      
+      puts msg_hash.inspect
+      
+      client.account.sms.messages.create(
+        msg_hash
+      )
+      
+      
+    else
+      self.old_send_reset_password_instructions
+    end  
   end
   
   def self.find_or_create_for_oauth(access_token, signed_in_resource=nil)
@@ -48,10 +75,10 @@ class User < ActiveRecord::Base
      end
    end
    
-   def create_temp_login from
+   def self.create_temp_login from
      email = "#{from}@neverforgetify.com"
-     upassword = Devise.friendly_token[0,20]
-     user = User.create(email: email, phone_number: from, password: upassword)
+     upassword = Devise.friendly_token[0,6]
+     {:user => User.create(email: email, phone_number: from, password: upassword), :temppassword => upassword}
    end
    
 end

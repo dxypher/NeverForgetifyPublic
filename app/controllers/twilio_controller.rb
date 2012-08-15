@@ -15,10 +15,11 @@ class TwilioController < ActionController::Base
     respond_to do |format|
       format.xml {
       if sender.present?
-        @notification = Notification.new
-        @notification.user = sender
-        @notification.natural_time = time
-        @notification.body = message
+        # @notification = Notification.new
+        #         @notification.user = sender
+        #         @notification.natural_time = time
+        #         @notification.body = message
+        create_notification sender, time, message
         if @notification.save
           response = Twilio::TwiML::Response.new do |r|
             r.Sms "Your notification has been set."
@@ -32,13 +33,27 @@ class TwilioController < ActionController::Base
           render :xml => response.text
         end
       else
-        new_user = create_temp_login from
+        
         response = Twilio::TwiML::Response.new do |r|
-          r.Sms "You're notification has been set, login with your phone number and use #{new_user.upassword} as your password."
+          new_user = User.create_temp_login(from)
+          nuser = new_user[:user];
+          temppassword = new_user[:temppassword]
+          create_notification nuser, time, message
+          r.Sms "You're notification has been set, login with your phone number and use #{temppassword} as your password."
         end
         render :xml => response.text
       end
       } 
     end
+  end
+  
+  private
+  
+  def create_notification user, time, message
+    @notification = Notification.new
+    @notification.user = user
+    @notification.natural_time = time
+    @notification.body = message
+    @notification.save
   end
 end

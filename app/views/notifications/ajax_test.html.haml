@@ -1,0 +1,20 @@
+=javascript_include_tag "ajax_test"
+
+.tweets
+  %h1 Tweets
+
+  .tweet-container
+  
+  
+  
+  
+%script{id: "tweet", type: 'text/html'}
+  
+  .tweets.row-fluid
+    .span3.avatar
+      %img{:src => "{{#user}} {{profile_image_url}} {{/user}}"}
+    .span9.content
+      %span.username {{#user}} {{name}} {{/user}}
+      %span.body {{text}}
+      %span.date {{created_at}}
+  

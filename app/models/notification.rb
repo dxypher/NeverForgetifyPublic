@@ -31,5 +31,20 @@ class Notification < ActiveRecord::Base
       end
     end
   end
+  def api_attributes
+    { id: self.id,
+      body: self.body,
+      time: self.time,
+      recurring: self.recurring
+    }
+  end
+  def full_api_attributes
+    { id: self.id,
+      body: self.body,
+      time: self.time,
+      recurring: self.recurring,
+      schedules: self.schedules.collect{|s| s.api_attributes }
+    }
+  end
   
 end
