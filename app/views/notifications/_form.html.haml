@@ -4,17 +4,22 @@
 /     = f.input :natural_time, :as => :string
 /     = f.input :recurring, :as => :select, :collection => ["Every Day", "Every Week", "Every Month"]
 /   = f.actions  
-= form_for @notification do |f|
-  = f.label :body
-  = f.text_area :body
-  = f.label :natural_time, :as => :string
-  = f.text_field :natural_time, :as => :string
-  = f.label :recurring, :collection => ["Every Day", "Every Week", "Every Month"]
-  = f.select :recurring, :collection => ["Not Recurring","Every Day", "Every Week", "Every Month"]
-  = f.label "Send Notification via Email"
-  = f.check_box :send_email 
-  = f.label "Send Notification via SMS"
-  = f.check_box :send_sms
-  %br
-  %br
-  = f.submit
+.row-fluid#notification-form
+  = form_for @notification, :remote => true, :format => :json, :html => {:id => "notification_form" } do |f|
+    .row-fluid#body
+      = f.text_area :body, :placeholder => "Type your notification here."
+    .row-fluid#notification-details
+      .span4.time
+        = f.text_field :natural_time, :as => :string, :placeholder => "Time e.g. Tomorrow at 2pm, Friday at 7:30am, 10/13/2012 7:39pm, In 1 hour ", :class => 'row-fluid'
+      .span3.recur
+        = f.select :recurring, :collection => ["Not Recurring","Every Day", "Every Week", "Every Month"]
+      .span2.type
+        = f.label :send_sms  do
+          = f.check_box :send_sms, :checked => true
+          SMS
+            
+        = f.label :send_email do
+          = f.check_box :send_email
+          Email
+      .span3#submit-button
+        = f.submit :class => "btn btn-primary pull-right"

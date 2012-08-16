@@ -13,3 +13,20 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function(){
+	$('#notification_form')
+		.bind("ajax:beforeSend", function(){
+			console.log("proccessing")
+		})
+		.bind("ajax:success", function(event, data, status, xhr){
+			console.log(status);
+			console.log(data);
+			var edit_button = "<a href='/notifications/"+data.notification.id+"/edit'>Edit</a>"
+			var delete_button = "<a href='/notifications/"+data.notification.id+"', data-method='delete', data-confirm='Are you sure.'>Delete</a>"
+			var tr = "<tr><td>"+data.notification.body + "</td><td>"+data.notification.time +"</td><td>"+ edit_button + delete_button +"</td></tr>"
+			$( "#my-notifications").append(tr)
+			console.log(tr)
+		});
+		
+});

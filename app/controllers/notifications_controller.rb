@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications
+    @notification = Notification.new
   end
 
   def new
@@ -15,7 +16,21 @@ class NotificationsController < ApplicationController
     
     notification.user = current_user
     notification.save
-    redirect_to notifications_path
+    if notification.save
+      respond_to do |format|
+        format.html{redirect_to notifications_path}
+        format.json{
+          render :json => {status: "success", notification: notification.full_api_attributes}
+        }
+      end
+    else
+      respond_to do |format|
+        format.html{redirect_to notifications_path}
+        format.json{
+          render :json => {status: "error", errors: notification.errors}
+        }
+      end
+    end
   end
 
   def destroy

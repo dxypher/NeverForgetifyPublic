@@ -1,3 +1,57 @@
 // Place all the styles related to the Notifications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#notification-form{
+	margin: 40px 0px;
+	#body{
+		textarea{
+			height: 55px;
+			width: 100%;
+			padding: 10px ;
+			font-size: 16px;
+			color: #555;
+			box-sizing: border-box;
+		}
+	}
+	#notification-details{
+		.time input{
+			box-sizing: border-box;
+			padding: 10px ;
+		}
+		.type{
+			label{
+				display: inline;
+				margin-right: 15px;
+			}
+		}
+		.recur{
+			select{
+				height: 21px;
+				
+			}
+		}
+	}
+}
+
+
+
+//.row-fluid#notification-form
+//  = form_for @notification do |f|
+//    .row-fluid#body
+//      = f.text_area :body, :placeholder => "Type your notification here."
+//    .row-fluid#notification-details
+//      .span4.time
+//        = f.text_field :natural_time, :as => :string, :placeholder => "Time e.g. Tomorrow at 2pm, Friday at 7:30am, 10/13/2012 7:39pm, In 1 hour ", :class => 'row-fluid'
+//      .span4.recur
+//        = f.select :recurring, :collection => ["Not Recurring","Every Day", "Every Week", "Every Month"]
+//      .span4.type
+//        = f.label :send_sms  do
+//          = f.check_box :send_sms, :checked => true
+//          SMS
+//            
+//        = f.label :send_email do
+//          = f.check_box :send_email
+//          Email
+//    .row-fluid#submit-button
+//      = f.submit :class => "btn btn-primary"
