@@ -10,19 +10,26 @@ namespace :never_forgetify do
     # send the notification via twilio
     client = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
     notifications.each do |notification|
-      phone_number = notification.user.phone_number.gsub(/(^1)*\D/, "");
       
-      msg_hash = {:from => TWILIO_NUMBER,
-      :to => "+1#{phone_number}",
-      :body => notification.body}
+      if notification.send_email == true
+        NotificationMailer.notification_email(notification).deliver
+      end
       
-      puts msg_hash.inspect
+      if notification.send_sms == true  
+        phone_number = notification.user.phone_number.gsub(/(^1)*\D/, "");
       
-      client.account.sms.messages.create(
-        msg_hash
-      )
-      notification.sent_time = DateTime.now
-      notification.save
+        msg_hash = {:from => TWILIO_NUMBER,
+        :to => "+1#{phone_number}",
+        :body => notification.body}
+      
+        puts msg_hash.inspect
+      
+        client.account.sms.messages.create(
+          msg_hash
+        )
+        notification.sent_time = DateTime.now
+        notification.save
+      end
     end
     
     # mark that notification as sent at the current time

@@ -11,6 +11,10 @@
   = f.text_field :natural_time, :as => :string
   = f.label :recurring, :collection => ["Every Day", "Every Week", "Every Month"]
   = f.select :recurring, :collection => ["Not Recurring","Every Day", "Every Week", "Every Month"]
+  = f.label "Send Notification via Email"
+  = f.check_box :send_email 
+  = f.label "Send Notification via SMS"
+  = f.check_box :send_sms
   %br
   %br
   = f.submit
