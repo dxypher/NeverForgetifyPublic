@@ -3,5 +3,8 @@
   %li First Name: #{@user.first_name}
   %li Last Name: #{@user.last_name}
   %li Phone Number: #{@user.phone_number}
-=link_to "Reset Password", reset_password_form_path
+  %li email: #{@user.email}
+  %li Twitter Handle: #{@user.twitter_handle}
+  =link_to "Reset Password", reset_password_form_path
+  =link_to "Edit Profile", edit_user_path(current_user)
     

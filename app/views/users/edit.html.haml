@@ -1,0 +1,15 @@
+%br
+
+= form_for @user do |f|
+  =f.label :first_name
+  =f.text_field :first_name
+  =f.label :last_name
+  =f.text_field :last_name
+  =f.label :phone_number
+  =f.text_field :phone_number
+  =f.label :email
+  =f.text_field :email
+  =f.label :twitter_handle
+  =f.text_field :twitter_handle
+  %br
+  =f.submit

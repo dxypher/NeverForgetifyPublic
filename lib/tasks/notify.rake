@@ -13,6 +13,8 @@ namespace :never_forgetify do
       
       if notification.send_email == true
         NotificationMailer.notification_email(notification).deliver
+        notification.sent_time = DateTime.now
+        notification.save
       end
       
       if notification.send_sms == true  
@@ -29,6 +31,13 @@ namespace :never_forgetify do
         )
         notification.sent_time = DateTime.now
         notification.save
+      end
+      
+      if notification.send_twitter == true
+        twitter_handle = notification.user.twitter_handle.gsub(/(^@)/, "")
+        Twitter.update("@"+twitter_handle + " " + notification.body)
+        notification.sent_time = DateTime.now
+        notification.save 
       end
     end
     

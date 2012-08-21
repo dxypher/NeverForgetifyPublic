@@ -37,6 +37,7 @@ gem 'recurrence'
 gem 'oauth2'
 gem "omniauth-facebook", "1.3.0"
 gem 'twitter'
+gem 'kaminari'
 
 
 # To use ActiveModel has_secure_password

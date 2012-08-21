@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   def index
     @notifications = current_user.notifications
+    @notifications = @notifications.page(params[:page]).per(10)
     @notification = Notification.new
   end
 

@@ -15,6 +15,16 @@ class UsersController < ApplicationController
     @user = User.find(current_user)
   end
   
+  def edit
+    @user = User.find(current_user)
+  end
+  
+  def update
+    user = User.find(params[:id])
+    user.update_attributes(params[:user])
+    redirect_to root_path
+  end
+  
   def reset_password_form
     @user = User.find(params[:id])
   end

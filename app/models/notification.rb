@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
   belongs_to :user
   has_many :schedules, dependent: :destroy
-  attr_accessible :body, :time, :natural_time, :recurring, :send_email, :send_sms
+  attr_accessible :body, :time, :natural_time, :recurring, :send_email, :send_sms, :send_twitter
   
   before_validation do
     self.time = Chronic.parse(self.natural_time, :context => :future)
