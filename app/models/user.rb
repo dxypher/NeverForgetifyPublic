@@ -17,6 +17,15 @@ class User < ActiveRecord::Base
   
   has_many :notifications
   
+  
+  
+  after_update do
+    if self.twitter_handle == ""
+      self.twitter_handle = nil
+      self.save
+    end
+  end
+  
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

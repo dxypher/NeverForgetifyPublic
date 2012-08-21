@@ -1,4 +1,6 @@
 class Notification < ActiveRecord::Base
+  include ActiveModel::Validations
+  
   belongs_to :user
   has_many :schedules, dependent: :destroy
   attr_accessible :body, :time, :natural_time, :recurring, :send_email, :send_sms, :send_twitter
@@ -8,6 +10,17 @@ class Notification < ActiveRecord::Base
   end
 
   validates :time, :presence => true
+  validate :twitter_handle_present_for_tweet_notification
+  
+  def twitter_handle_present_for_tweet_notification
+    if send_twitter == true && user.twitter_handle.nil?
+      flash[:notice] = "We can't tweet until you add a Twitter handle to your profile."
+      # errors.add(:send_twitter, "Must add Twitter handle to your profile.")
+      #       puts errors
+    end
+  end
+  
+  
   
   after_create do
     case self.recurring
