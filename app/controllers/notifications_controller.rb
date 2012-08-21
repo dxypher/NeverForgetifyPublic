@@ -16,7 +16,6 @@ class NotificationsController < ApplicationController
     notification = Notification.new(params[:notification])
     
     notification.user = current_user
-    notification.save
     if notification.save
       respond_to do |format|
         format.html{redirect_to notifications_path}

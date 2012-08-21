@@ -9,7 +9,7 @@ class Notification < ActiveRecord::Base
 
   validates :time, :presence => true
   
-  after_save do
+  after_create do
     case self.recurring
     when "Not Recurring"
       self.schedules.create(time: self.time)
