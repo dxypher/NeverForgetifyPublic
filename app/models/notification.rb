@@ -10,13 +10,15 @@ class Notification < ActiveRecord::Base
   end
 
   validates :time, :presence => true
-  validate :twitter_handle_present_for_tweet_notification
+  validate :where_to_send_notification
   
-  def twitter_handle_present_for_tweet_notification
+  def where_to_send_notification
     if send_twitter == true && user.twitter_handle.nil?
-      flash[:notice] = "We can't tweet until you add a Twitter handle to your profile."
-      # errors.add(:send_twitter, "Must add Twitter handle to your profile.")
-      #       puts errors
+      errors.add(:send_twitter, "Must add Twitter handle to your profile.")
+    elsif send_email == true && user.email.nil?
+      errors.add(:email, "Must add email to your profile.")
+    elsif send_sms == true && user.phone_number.nil?
+      errors.add(:phone_number, "Must add phone number to your profile.")
     end
   end
   

@@ -41,10 +41,6 @@ namespace :never_forgetify do
       end
     end
     
-    # mark that notification as sent at the current time
-    
-    # save notification
-    
     # desc "Schedule weekly and daily recurring notifications for each user"
     #  task :schedule_weekly_daily_notifications => :environment do
     #     #Schedule table includes all notifications that are recurring

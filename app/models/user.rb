@@ -23,6 +23,12 @@ class User < ActiveRecord::Base
     if self.twitter_handle == ""
       self.twitter_handle = nil
       self.save
+    elsif self.phone_number == ""
+      self.phone_number = nil
+      self.save
+    elsif self.email == ""
+      self.email = nil
+      self.save
     end
   end
   

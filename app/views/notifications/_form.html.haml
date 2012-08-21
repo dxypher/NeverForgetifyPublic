@@ -6,6 +6,13 @@
 /   = f.actions  
 .row-fluid#notification-form
   = form_for @notification, :remote => true, :format => :json, :html => {:id => "notification_form" } do |f|
+    -if @notification.errors.any?
+      #error_explanation
+
+        %ul
+        -@notification.errors.full_messages.each do |msg|
+          %li= msg
+          
     .row-fluid#body
       = f.text_area :body, :placeholder => "Type your notification here."
     .row-fluid#notification-details
