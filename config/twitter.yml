@@ -1,0 +1,6 @@
+development:
+  oauth_token: '762486703-UCOM8rxzkEzvcX77QT6WrE02c1CyGWfhAof2OfFj'
+  oauth_token_secret: 'CF9Xd0TTU3Bvt5KDeCwQMrAlFOhx7Nc5kr2iFnXUF7s'
+production:
+  oauth_token: '762486703-UCOM8rxzkEzvcX77QT6WrE02c1CyGWfhAof2OfFj'
+  oauth_token_secret: 'CF9Xd0TTU3Bvt5KDeCwQMrAlFOhx7Nc5kr2iFnXUF7s'

@@ -1,8 +1,11 @@
-class Api::NotificationsController < ApplicationController
+class Api::NotificationsController < Api::ApiController
   
   def index
     notifications = current_user.notifications
-    render :json => {notifications: notifications.collect{|n| n.api_attributes}} 
+
+    
+    
+    render :json => notifications.collect{|n| n.api_attributes}
     
   end
   

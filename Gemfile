@@ -36,6 +36,7 @@ gem 'capistrano'
 gem 'recurrence'
 gem 'oauth2'
 gem "omniauth-facebook", "1.3.0"
+gem 'twitter'
 
 
 # To use ActiveModel has_secure_password
