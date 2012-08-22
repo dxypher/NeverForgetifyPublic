@@ -46,6 +46,8 @@ class Notification < ActiveRecord::Base
       end
     end
   end
+  
+  
   def api_attributes
     { id: self.id,
       body: self.body,

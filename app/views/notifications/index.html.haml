@@ -6,14 +6,20 @@
     %th= Notification
     %th Date / Time
     %th Options
+    %th Sent
   - @notifications.each do |notification|
-    -if notification.sent_time.nil? || notification.sent_time > DateTime.now
-      %tr
-        %td= link_to notification.body, notification_schedules_path(notification)
-        %td= notification.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
-        %td
-          = link_to "Edit", edit_notification_path(notification)
-          = link_to "Delete", notification_path(notification), confirm: "Are you sure", method: :delete
-
+    / -if notification.sent_time.nil? || notification.sent_time > DateTime.now
+    %tr
+      %td= link_to notification.body, notification_schedules_path(notification)
+      %td= notification.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
+      %td
+        = link_to "Edit", edit_notification_path(notification)
+        = link_to "Delete", notification_path(notification), confirm: "Are you sure", method: :delete
+      %td
+        -if notification.sent == true
+          %i.icon-thumbs-up
+        -else
+          %p Pending
+  
 .pagination
   =paginate @notifications

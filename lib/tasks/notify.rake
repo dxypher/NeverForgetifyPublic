@@ -14,6 +14,7 @@ namespace :never_forgetify do
       if notification.send_email == true
         NotificationMailer.notification_email(notification).deliver
         notification.sent_time = DateTime.now
+        notification.sent = true
         notification.save
       end
       
@@ -30,6 +31,7 @@ namespace :never_forgetify do
           msg_hash
         )
         notification.sent_time = DateTime.now
+        notification.sent = true
         notification.save
       end
       
@@ -37,21 +39,20 @@ namespace :never_forgetify do
         twitter_handle = notification.user.twitter_handle.gsub(/(^@)/, "")
         Twitter.update("@"+twitter_handle + " " + notification.body)
         notification.sent_time = DateTime.now
+        notification.sent = true
         notification.save 
       end
     end
-    
-    # desc "Schedule weekly and daily recurring notifications for each user"
-    #  task :schedule_weekly_daily_notifications => :environment do
-    #     #Schedule table includes all notifications that are recurring
-    #     #find all schedule items that have recurring times within 1 week from DateTime.now
-    #     #append these to notifications table
-    #      #recurring_time += user.notifiction.time + day || week || month
-    #  end
-    #  
-    #  desc "Schedule monthly recurring notifications"
-    #  task do
-    #    
-    #  end
+  end
+  desc "Schedule weekly and daily recurring notifications for each user"
+  task :schedule_weekly_notifications => :environment do
+    schedules = Schedule.all
+    schedules.each do |schedule|
+      notification = Notification.find(schedule[:notification_id])
+      user = notification.user
+      user.notifications << notification
+      user.save
+      
+    end
   end
 end

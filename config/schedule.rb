@@ -23,8 +23,7 @@ every 1.minutes do
   rake "never_forgetify:send_notifications"
 end
 
-
 # rake task to create schedule of all notification for following week
-# every :sunday, :at => '11pm' do
-#   rake "never_forgetify:schedule_recurring_notifications"
-# end
+every :sunday, :at => '12am' do
+  rake "never_forgetify:schedule_weekly_notifications"
+end
