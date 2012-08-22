@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-  belongs_to :notificaton
+  belongs_to :notification
   attr_accessible :sent, :time
   
   validates :time, :uniqueness => { :scope => :notification_id,
