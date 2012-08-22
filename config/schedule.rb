@@ -19,15 +19,15 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.minutes do
-  rake "never_forgetify:send_notifications"
+every 1.minutes do 
+  rake "never_forgetify:send_notifications", :environment => "development"
 end
 
 # rake task to create schedule of all notification for following week
 every :sunday, :at => '12am' do
-  rake "never_forgetify:schedule_weekly_notifications"
+  rake "never_forgetify:schedule_weekly_notifications", :environment => "development"
 end
 
 every :month do
-  rake "never_forgetify:schedule_monthly_notifications"
+  rake "never_forgetify:schedule_monthly_notifications", :environment => "development"
 end
