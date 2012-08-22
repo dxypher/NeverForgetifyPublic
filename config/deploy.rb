@@ -37,7 +37,7 @@ namespace :deploy do
     end
   end
   task :update_crontab, :roles => [:app, :web] do  
-    #run "cd #{release_path} && whenever --update-crontab #{application}"  
+    run "cd #{release_path} && whenever --update-crontab #{application}"  
   end  
   task :start do ; end
   task :stop do ; end
