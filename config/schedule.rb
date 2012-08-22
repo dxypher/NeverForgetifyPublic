@@ -27,3 +27,7 @@ end
 every :sunday, :at => '12am' do
   rake "never_forgetify:schedule_weekly_notifications"
 end
+
+every :month do
+  rake "never_forgetify:schedule_monthly_notifications"
+end
