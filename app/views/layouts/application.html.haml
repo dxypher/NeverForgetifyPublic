@@ -7,6 +7,7 @@
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    %link{"rel" => "stylesheet", "href" => "http://fonts.googleapis.com/css?family=Miniver", "type" => "text/css"}
   %body
     .flash_helper=flash_helper
       
@@ -21,8 +22,8 @@
           %a.brand(href='#{root_path}')
             %span.never-forgetify-logo
               NeverForgetify
-
-          %div.nav-collapse
+          
+          %div.row-fluid.nav-collapse
             %ul.nav
               - if current_user
                 %li
