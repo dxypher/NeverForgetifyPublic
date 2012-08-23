@@ -2,17 +2,19 @@
 %table
   %tr
     %th
-      = Notification
+      Notification
     %th
-      = 'Dates / Times'
+      Dates / Times
     %th
-    %th
+      Sent Time
   - @notification.schedules.each do |schedule|
     %tr
       %td
         = @notification.body
       %td
         = schedule.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
+      %td
+        = schedule.sent_time if schedule.sent_time != nil
       %td
         = link_to "Delete", notification_schedule_path(@notification, schedule), confirm: "Are you sure", method: :delete
 %br

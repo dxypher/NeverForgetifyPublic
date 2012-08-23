@@ -5,7 +5,9 @@
 /     = f.input :recurring, :as => :select, :collection => ["Every Day", "Every Week", "Every Month"]
 /   = f.actions  
 .row-fluid#notification-form
-  = form_for @notification, :remote => true, :format => :json, :html => {:id => "notification_form" } do |f|
+  - args = @ajax_post ? {:remote => true, :format => :json, :html => {:id => "notification_form"}} : {:html => {:id => "notification_form"}}
+  = form_for @notification, args do |f|
+  
     -if @notification.errors.any?
       #error_explanation
 

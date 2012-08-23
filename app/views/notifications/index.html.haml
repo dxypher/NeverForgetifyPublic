@@ -6,9 +6,8 @@
     %th= Notification
     %th Date / Time
     %th Options
-    %th Sent
+    %th Last Sent
   - @notifications.each do |notification|
-    / -if notification.sent_time.nil? || notification.sent_time > DateTime.now
     %tr
       %td= link_to notification.body, notification_schedules_path(notification)
       %td= notification.time.localtime.strftime("%A %b %-d %Y at %I:%M:%S %p")
@@ -16,10 +15,8 @@
         = link_to "Edit", edit_notification_path(notification)
         = link_to "Delete", notification_path(notification), confirm: "Are you sure", method: :delete
       %td
-        -if notification.sent == true
-          %i.icon-thumbs-up
-        -else
-          %p Pending
+        -if notification.schedules.order("sent_time DESC").first.present? && notification.schedules.order("sent_time DESC").first.sent_time.present? 
+          =notification.schedules.order("sent_time DESC").first.sent_time 
   
 .pagination
   =paginate @notifications

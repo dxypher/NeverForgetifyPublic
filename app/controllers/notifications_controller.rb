@@ -3,9 +3,11 @@ class NotificationsController < ApplicationController
     @notifications = current_user.notifications
     @notifications = @notifications.page(params[:page]).per(10)
     @notification = Notification.new
+    flash[:notice] = "hello"
   end
 
   def new
+    @ajax_post = false
     @notification = Notification.new
   end
   
@@ -25,7 +27,7 @@ class NotificationsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html{redirect_to notifications_path}
+        format.html{redirect_to new_notifications_path, :notice => notification.errors}
         format.json{
           render :json => {status: "error", errors: notification.errors}
         }

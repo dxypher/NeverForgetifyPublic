@@ -1,6 +1,6 @@
 class Schedule < ActiveRecord::Base
   belongs_to :notification
-  attr_accessible :sent, :time
+  attr_accessible :sent, :time, :sent_time
   
   validates :time, :uniqueness => { :scope => :notification_id,
       :message => "Only one schedule time per notification" }
